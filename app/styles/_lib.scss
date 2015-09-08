@@ -1,0 +1,201 @@
+// # Functions # //
+
+// # Mixins # //
+@mixin font-size($delta: 1) {
+  // translates px font sizes to rems (Relative Ems)
+  // $delta can be either a proper delta (i.e. a fractional value of the base font size) or a fixed size in px in which case it will calculate the proper delta against the base font size
+  @if unitless($delta) {
+    $delta: $delta;
+  } @else {
+    $delta: $delta / $base-font-size;
+  }
+  font-size: $delta * $base-font-size; // fallback to px for older browsers
+  font-size: $delta * 1rem;
+  @include breakpoint(max-width $desktop) {
+    font-size: $delta * $base-font-size * .9; // fallback to px for older browsers
+    font-size: $delta * 1rem * .9;
+  }
+}
+
+// The following mixins maintain consistent vertical rhythm.
+// They rely on the $vgutter variable. 
+// Instead of tweaking vertical rhythm by hand, use one of these mixins and tweak the $delta argument. The best $delta values are in even increments with a common denominator e.g. (1, 1.25, 1.5, .75) or (1, 1.33, 1.66, .66) etc. However using this will provide generally acceptable results regardless
+
+@mixin vspace($delta: 1, $top: false) {
+  // add vertical margins to elements. Set $top to true to add margin to the top as well.
+  margin-bottom: $vgutter * $delta;
+  @if ($top) {
+    margin-top: $vgutter * $delta;
+  }
+  @include breakpoint(max-width $desktop) {
+    margin-bottom: $vgutter * $delta * .9;
+    @if ($top) {
+      margin-top: $vgutter * $delta * .9;
+    }
+  }
+}
+@mixin vpadding($delta: 1) {
+  // (internal) padding
+  padding-top: $vgutter * $delta;
+  padding-bottom: $vgutter * $delta;
+}
+@mixin hspace($delta: 1) {
+  margin-left: $hgutter * $delta;
+  margin-right: $hgutter * $delta;
+}
+
+@mixin layout-fixed-column($columns: 1) {
+  // Columns automatically collapse to full width on small viewports
+  margin-bottom: $vgutter;
+  @include breakpoint($desktop) {
+    margin-bottom: 0;
+    @include span($columns of 24);
+    &:last-of-type {
+      //@include span(24/$columns last);
+      margin-right: 0;
+    }
+  }
+}
+
+@mixin header($type:'sans', $size: 2) {
+  color: inherit;
+  line-height: 1.1;
+  @if($type=='serif') {
+    font-family: $serif;
+    font-weight: 400;
+    font-style: italic;
+    @include font-size($size);
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+    // -webkit-font-smoothing: antialiased; // we may need to uncomment this line if serif headers get too glumpy
+  } @else {
+    font-family: $sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    @include font-size($size);
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+}
+
+
+@mixin circled-icon(
+  $size: 25px, 
+  $background: $white,
+  $border: 0px solid
+  ) {
+  // This just draws a circle around the icon.
+  // Size the icon itself in the selector calling this mixin
+  vertical-align: bottom;
+  text-align: center;
+  display: inline-block;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  border-radius: 50%;
+  background: $background;
+  border: $border;
+}
+
+
+// Mixin for buttons. Simple for now, extend later
+@mixin button($link: $gray-7) {
+  padding: ($vgutter/2) $hgutter;
+  background: $link;
+  color: $white;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  &:after {
+    content: "\00a0\203a";
+  }
+  &:hover {
+    opacity: $link-hover-opacity;
+  }
+  display: inline-block;
+}
+
+@mixin card-item {
+  border: 1px solid $gray-7;
+  border-top-width: 5px;
+  overflow: hidden;
+  &:nth-child(3n-2) { // this is unlovely
+    border-top-color: map-get($crs-fresh-map, 1)
+  }
+  &:nth-child(3n-1) {
+    border-top-color: map-get($crs-fresh-map, 2)
+  }
+  &:nth-child(3n) {
+    border-top-color: map-get($crs-fresh-map, 3)
+  }
+  background: $white;
+  @include vspace();
+}
+
+@mixin bg-color($bg-color: $whisper) {
+  // this colors the background of spans in h6 elements
+  & h6 span, & {
+    background-color: $bg-color;
+  }
+}
+
+@mixin layout-tiles($up: 3) {
+  // this generates a tile selector with a number ($up) of equal-sized tiles in desktop viewport, and decreasing number of tiles in smaller viewports
+
+  $mobile-up: if($up - 1 <= 1, 1, $up - 1);   // $up - 1 tiles wide in mobile 
+  $handheld-up: if($up - 2 <= 1, 1, $up - 2); // $up - 2 tiles wide in handheld
+  $cols: 24 / $up; // width of each tile in desktop
+  $mobile-cols: 24 / $mobile-up; // width of each tile in mobile
+  $handheld-cols: 24 / $handheld-up; // width of each tile in mobile
+
+  // layout in handheld viewports (default)
+  @include span($handheld-cols of 24);
+  &:nth-child(#{$handheld-up}n) { // unset margin on last child
+    margin-right: 0;
+  }
+
+  // layout in mobile viewports
+  @include breakpoint($mobile) {
+    &:nth-child(#{$handheld-up}n), & { // reset margins removed in last media query
+      @include span($mobile-cols of 24);
+    }
+    &:nth-child(#{$mobile-up}n) { // unset margin on last child
+      margin-right: 0;
+    }
+  }
+
+  // layout in desktop viewports
+  @include breakpoint($desktop) {
+    &:nth-child(#{$handheld-up}n), &:nth-child(#{$mobile-up}n), & { // reset margins removed in last media query
+      @include span($cols of 24);
+    }
+    &:nth-child(#{$up}n) { // unset margin on last child
+      margin-right: 0;
+    }
+  }
+}
+
+// ## Temporary mixins to overload mixins missing from compass-mixins ## //
+
+@mixin input-placeholder {
+  // used in _base.scss
+  // replaces compass/css/user-interface/input-placeholder()
+  &::-webkit-input-placeholder  {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+    opacity: 1;
+  }
+  &::-moz-placeholder {
+    @content;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+
+
+// # Pseudoclasses # //
+// Don’t use pseudoclasses, use @mixins

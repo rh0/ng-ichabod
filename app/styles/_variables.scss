@@ -1,0 +1,202 @@
+// # Variables # //
+
+// ## Colors ## //
+
+// ### CRS Brand Blue
+$crs-brand-blue:          hsl(219, 100%, 26%);  // #002e85;
+$crs-brand-darkblue:      hsl(215, 83%, 14%);   // #021f41;
+
+// ### Cool family // default brand colors
+$crs-cool-purple:         hsl(285, 25%, 60%);   // #a680b3;
+$crs-cool-blue:           hsl(202, 72%, 64%);   // #61b5e5;
+$crs-cool-teal:           hsl(170, 47%, 61%);   // #6dcabb;
+
+// ### Warm family
+$crs-warm-pink:           hsl(343, 88%, 71%);   // #f67499;
+$crs-warm-peach:          hsl(13,  100%, 71%);  // #ff8b6b;
+$crs-warm-gold:           hsl(44,  100%, 46%);  // #ebac00;
+
+// ### Fresh family
+$crs-fresh-brightblue:    hsl(192, 100%, 44%);  // #00b4e0;
+$crs-fresh-green:         hsl(170, 100%, 34%);  // #00ad91;
+$crs-fresh-brightgreen:   hsl(65, 100%, 42%);   // #c4d600;
+
+// ### Grays
+$crs-vdark-gray:          hsl(0, 0%, 10%);      // #1a1a1a;
+$crs-dark-gray:           hsl(0, 0%, 31%);      // #4f4f4f;
+$crs-med-gray:            hsl(0, 0%, 48%);      // #7a7a7a;
+$crs-light-gray:          hsl(45, 2%, 64%);     // #a4a3a0;
+$crs-lighter-gray:        hsl(45, 2%, 80%);     // #cbcbc9;
+$crs-pale-gray:           hsl(0, 0%, 91%);      // #e7e7e7;
+
+//$eigengrau:               hsl(240, 14%, 10%); // use instead of pure black for fields of color
+$eigengrau:               hsl(0, 0, 1%); // not actually eigengrau, see ab. line.
+$black:                   hsl(0, 0%, 0%);
+$white:                   hsl(0, 0%, 100%);
+
+// ### Social media colors
+$pinterest-red:           #D63532;
+$instagram-brown:         #895846;
+$twitter-aqua:            #00C7FA;
+$facebook-blue:           #3A5898;
+$youtube-red:             #CB1F26;
+$tumblr-blue:             #395874;
+$linkedin-blue:           #1B85BC;
+
+// ### Color primitives ### //
+// for historical purposes //
+$red:     hsl(355,100,40);
+$orange:  hsl(24,100,45);
+$yellow:  hsl(50,93,53);
+$green:   hsl(74,100,28);
+$teal:    hsl(169,97,36);
+$blue:    hsl(204,82,45);
+$purple:  hsl(256,52,56);
+$pink:    hsl(315,72,56);
+
+// ### Grays ### //
+// Indirected to CRS colors above where possible
+$gray-3:    $crs-dark-gray;    // hsl(0,0,30%);
+$gray-4:    hsl(0,0,40%); 
+$gray-5:    $crs-med-gray;     // hsl(0,0,50%);
+$gray-6:    $crs-light-gray;   // hsl(0,0,60%);
+$gray-7:    hsl(0,0,70%); 
+$gray-8:    $crs-lighter-gray; // hsl(0,0,80%);
+$gray-9:    $crs-pale-gray;    // hsl(0,0,90%);
+$gray-95:   hsl(0,0,95%);
+
+// ### Color indirection ### //
+
+// ### Color Abstraction ### //
+$body-color: $crs-dark-gray;
+$quiet: $crs-med-gray;
+$hushed: $crs-light-gray;
+$whisper: $crs-lighter-gray;
+$silent: $crs-pale-gray;
+$emphasis: $crs-fresh-brightblue;
+$danger: $red;
+$warning: $orange;
+$success: $green;
+$highlight: lighten($crs-fresh-brightgreen, 30%);
+$link-unvisited: $crs-fresh-brightblue;
+$link-visited: darken($crs-fresh-brightblue, 20%);
+$link-hover: $crs-fresh-green;
+$link-active: $crs-fresh-brightgreen;
+$white: white;
+
+$crs-cool-map: (1: $crs-cool-purple, 2: $crs-cool-blue, 3: $crs-cool-teal);
+$crs-warm-map: (1: $crs-warm-pink, 2: $crs-warm-peach, 3: $crs-warm-gold);
+$crs-fresh-map: (1: $crs-fresh-brightblue, 2: $crs-fresh-green, 3: $crs-fresh-brightgreen);
+
+$link-hover-opacity: 0.8;
+
+// ## Fonts ## //
+$sans-serif:  'Gotham A','Gotham B',"Helvetica Neue", Verdana, Arial, sans-serif;
+$serif:       'Libre Baskerville', 'Baskerville', Georgia, "Times New Roman", Times, serif;
+
+$default-font: $sans-serif;
+$monospace-font: monospace;
+$bold-weight: 700;
+$normal-weight: 400;
+$light-weight: 300;
+$base-font-size: 16px;
+$base-line-height: 1.5;
+
+// ## Breakpoints ## //
+$desktop: 960px;
+$mobile:  600px;
+$wide: 1600px;
+
+// ## Layout ## //
+// These are used by the vertical rhythm mixins in _lib.scss
+// In general: avoid specifying padding and margins directly, instead use these.
+// Even better: use a mixin to achieve the same effect, particularly vspace() or hspace()
+
+$vgutter: 16px;
+$hgutter: 20px;
+
+// ### Susy defaults ### //
+$susy: (
+);
+
+
+// #### Fixed grid #### //
+// The fixed grid is fixed, static and SIMPLE
+// I use this grid as little as possible
+// There are 24 columns of *approximately* 30px ea. (the fractions get fuzzy as you approx 24 columns)
+// Grid gutters are 10px, HALF the horizontal gutter above
+// Other Susy grids are possible but you will need to overload this map
+// Nothing uses this grid right now! Even so-called "static" grids use fluid grids and variable widths
+
+$fixed-columns: 24;
+$fixed-column-width: ($desktop - (($fixed-columns - 1) * ($hgutter/2))) / $fixed-columns;
+$fixed-grid: ( // Fixed grid layout
+  columns: $fixed-columns,
+  column-width: $fixed-column-width,
+  gutters: ($hgutter/2)/$fixed-column-width,
+  math: static
+);
+
+
+
+// ### Hardcoded colors FOR STYLEGUIDE ONLY ### //
+
+.crs-brand-blue { color: $white;
+	 background-color: $crs-brand-blue;
+	 }
+.crs-brand-darkblue { color: $white;
+	 background-color: $crs-brand-darkblue;
+	 }
+
+// ### Cool family // default brand colors
+.crs-cool-purple { color: $white;
+	 background-color: $crs-cool-purple;
+	 }
+.crs-cool-blue { color: $white;
+	 background-color: $crs-cool-blue;
+	 }
+.crs-cool-teal { color: $white;
+	 background-color: $crs-cool-teal;
+	 }
+
+// ### Warm family
+.crs-warm-pink { color: $white;
+	 background-color: $crs-warm-pink;
+	 }
+.crs-warm-peach { color: $white;
+	 background-color: $crs-warm-peach;
+	 }
+.crs-warm-gold { color: $white;
+	 background-color: $crs-warm-gold;
+	 }
+
+// ### Fresh family
+.crs-fresh-brightblue { color: $white;
+	 background-color: $crs-fresh-brightblue;
+	 }
+.crs-fresh-green { color: $white;
+	 background-color: $crs-fresh-green;
+	 }
+.crs-fresh-brightgreen { color: $white;
+	 background-color: $crs-fresh-brightgreen;
+	 }
+
+// ### Grays
+.crs-vdark-gray { color: $white;
+	 background-color: $crs-vdark-gray;
+	 }
+.crs-dark-gray { color: $white;
+	 background-color: $crs-dark-gray;
+	 }
+.crs-med-gray { color: $white;
+	 background-color: $crs-med-gray;
+	 }
+.crs-light-gray { color: $white;
+	 background-color: $crs-light-gray;
+	 }
+.crs-lighter-gray { color: $white;
+	 background-color: $crs-lighter-gray;
+	 }
+.crs-pale-gray { color: $white;
+	 background-color: $crs-pale-gray;
+	 }

@@ -1,0 +1,245 @@
+$darker-brightblue: darken($crs-fresh-brightblue, 10%);
+#edu-superhead {
+  background-color: $darker-brightblue;
+  color: $white;
+}
+#edu-mission {}
+#edu-core-programs {}
+
+// custom tile list for core programs
+.custom-tile-list {
+  overflow: hidden;
+}
+.custom-tile-item {
+  color: inherit;
+  text-align: center;
+  @include vspace(.5);
+  //@include layout-tiles(2);
+  @include span(12 of 24);
+  &:last-child {
+    @include span(12 of 24 last);
+  }
+  .list-text {
+    padding: $vgutter/2 0;
+    width: 100%;
+    //position: absolute;
+    //@include background-image(linear-gradient(to top, transparentize($black,0.5) transparentize($black,1)));
+    z-index: 1;
+    bottom: 0;
+    h4 {
+      margin: 0;
+    }
+  }
+  .list-image {
+    img, & {
+      display: block;
+      max-width: 100%;
+      max-height: auto;
+    }
+  }
+}
+a.custom-tile-item {
+  &, &:link, &:visited {
+    color: inherit;
+  }
+}
+.flex-direction-nav { 
+  a::before {
+    content: url('../images/prev-arrow.svg');
+  }
+  .flex-next { 
+    right: 0 !important; 
+    @include breakpoint($desktop) {
+      margin-right: -40px;
+    }
+    opacity: 1 !important; 
+    content: url('../images/next-arrow.svg');
+  }
+  .flex-prev { 
+    left: 0 !important;
+    opacity: 1 !important;
+    @include breakpoint($desktop) {
+      margin-left: -40px;
+    }
+    content: url('../images/prev-arrow.svg');
+  }
+}
+.flexslider { 
+  //width: 90% !important;
+  //margin: 0 auto !important;
+  background: none !important;
+  border: none !important;
+}
+.home-hero-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+#home-hero-carousel {
+  @include container(1085px);
+  margin: 0 auto;
+  position: relative;
+  .rays {
+    display: none;
+    @include breakpoint($desktop) {
+      display: block;
+    }
+  }
+  .flex-direction-nav {
+    display: none;
+    @include breakpoint($desktop) {
+      display: block;
+    }
+  }
+}
+.hero-carousel-nav { // this is OUTSIDE the carousel article
+  position: absolute;
+  z-index: 1000;
+  top: $vgutter/2;
+  left: 0;
+  @include breakpoint($desktop) {
+    top: $vgutter*2;
+    left: 62px; // TODO
+    padding-top: 60px; // this is space for the subhead nav
+  }
+  a {
+    display: block;
+    margin-bottom: 2px;
+    background: transparentize($black, 0.35);
+    color: white;
+    text-transform: uppercase;
+    @include font-size(12px);
+    text-decoration: none;
+    padding: 5px;
+    @include breakpoint($desktop) {
+      padding: 10px;
+    }
+    &.flex-active {
+      background: transparentize($crs-fresh-brightblue, 0.15);
+    }
+    &.hidden {
+      display: none; // hide first nav item (intro)
+    }
+  }
+}
+.hero-carousel-item { // contains each carousel item
+  position: relative;
+  overflow: hidden;
+  @include breakpoint($desktop) {
+    overflow: visible;
+  }
+  .rays {
+    position: absolute;
+    top: 0;
+    right: -300px;
+  }
+}
+.hero-carousel-image {
+  max-width: 1085px; // TODO desktop only
+  display: block;
+  margin-left: -100px;
+  @include breakpoint($desktop) {
+    margin-left: 0!important;
+  }
+}
+.hero-carousel-text {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: $vgutter/4;
+  background-color: transparentize($black, 0.6);
+  @include breakpoint($desktop) {
+    right: 62px; 
+    width: 554px; 
+    bottom: 0;
+    padding-bottom: $vgutter/2;
+    background-color: transparent;
+    @include background-image(linear-gradient( to right, transparentize($black, 1.0), transparentize($black, 0.6) 50%, transparentize($black, 1.0)));
+  }
+  .action-icons .list-item {
+    width: 75px; 
+    @include breakpoint($desktop) {
+      width: 130px; 
+    }
+    display: inline-block;
+  }
+  h2 {
+    &, strong {
+      @include font-size(1.5);
+    }
+    text-align: center;
+    margin: 0;
+    padding: $vgutter $hgutter;
+  }
+}
+#issue-intro {
+  .hero-carousel-text {
+    background-image: none;
+    @include breakpoint($desktop) {
+      width: 600px; // TODO
+    }
+    text-align: center;
+  }
+  h1 {
+    margin: 0;
+  }
+  p {
+    padding: $vgutter $hgutter;
+  }
+  .rays {
+    opacity: 0.7;
+  }
+}
+
+
+// Encircled icons
+// TODO: this is worth fitting into framework
+.encircled { // can't use "icon" as this gets overloaded by icon font selectors
+  background: black;
+  margin: 0 auto $vgutter/4 auto;
+  display: inline-block;
+  border-radius: 50%;
+  padding: 6px; 
+  width: 52px;
+  height: 52px;
+  @include breakpoint($desktop) {
+    padding: 12px; 
+    width: 90px;
+    height: 90px;
+  }
+  @for $i from 1 through 3 {
+    &.subflavor-#{$i} {
+      background: map-get($crs-fresh-map, $i);
+    }
+  }
+}
+
+
+// custom tile menu for issues on homepage
+ul.tile-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  li {
+    @include font-size(0.8);
+    text-align: center;
+  }
+  a {
+    display: block;
+    padding: $vgutter/2 $hgutter/2;
+    color: $white;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: transparentize($black, 0.6);
+    margin-bottom: 4px;
+  }
+}
+#issues-list {
+  @include breakpoint($mobile) {
+    width: 20%;
+    float: left;
+    margin-right: 1%;
+  }
+}
+

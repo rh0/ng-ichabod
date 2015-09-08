@@ -1,0 +1,48 @@
+@font-face {
+  /* font-family: 'NewBaskervilleITCPro-BoldItalic'; */
+  font-family: 'NewBaskerville';
+  src: url('fonts/NewBaskervilleITCPro-BoldItalic.eot?#iefix') format('embedded-opentype'),  
+       url('fonts/NewBaskervilleITCPro-BoldItalic.otf')  format('opentype'),
+       url('fonts/NewBaskervilleITCPro-BoldItalic.woff') format('woff'),
+       url('fonts/NewBaskervilleITCPro-BoldItalic.ttf')  format('truetype'),
+       url('fonts/NewBaskervilleITCPro-BoldItalic.svg#NewBaskervilleITCPro-BoldItalic') format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  /* font-family: 'NewBaskervilleITCPro-Bold'; */
+  font-family: 'NewBaskerville';
+  src: url('fonts/NewBaskervilleITCPro-Bold.eot?#iefix') format('embedded-opentype'),  
+       url('fonts/NewBaskervilleITCPro-Bold.otf')  format('opentype'),
+       url('fonts/NewBaskervilleITCPro-Bold.woff') format('woff'),
+       url('fonts/NewBaskervilleITCPro-Bold.ttf')  format('truetype'),
+       url('fonts/NewBaskervilleITCPro-Bold.svg#NewBaskervilleITCPro-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  /* font-family: 'NewBaskervilleITCPro-Italic'; */
+  font-family: 'NewBaskerville';
+  src: url('fonts/NewBaskervilleITCPro-Italic.eot?#iefix') format('embedded-opentype'),  
+       url('fonts/NewBaskervilleITCPro-Italic.otf')  format('opentype'),
+       url('fonts/NewBaskervilleITCPro-Italic.woff') format('woff'),
+       url('fonts/NewBaskervilleITCPro-Italic.ttf')  format('truetype'),
+       url('fonts/NewBaskervilleITCPro-Italic.svg#NewBaskervilleITCPro-Italic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  /* font-family: 'NewBaskervilleITCPro-Roman'; */
+  font-family: 'NewBaskerville';
+  src: url('fonts/NewBaskervilleITCPro-Roman.eot?#iefix') format('embedded-opentype'),  
+       url('fonts/NewBaskervilleITCPro-Roman.otf')  format('opentype'),
+       url('fonts/NewBaskervilleITCPro-Roman.woff') format('woff'),
+       url('fonts/NewBaskervilleITCPro-Roman.ttf')  format('truetype'),
+       url('fonts/NewBaskervilleITCPro-Roman.svg#NewBaskervilleITCPro-Roman') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+

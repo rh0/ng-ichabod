@@ -1,0 +1,32 @@
+// # Dependencies # //
+
+// # Imports # //
+
+@import "../bower_components/compass-mixins/lib/compass/reset";
+@import "../bower_components/compass-mixins/lib/compass";
+@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";
+@import "../bower_components/susy/sass/susy";
+
+
+// ## Font imports ## //
+// @import "font-baskerville"; // There are licensing issues with this font!
+@import url('http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic');
+@import "font-icon";
+
+// Import shared library after declaring abstracted variables
+
+// ## Local libraries ## //
+@import "variables";      // local variables for this project
+@import "lib";            // functions, mixins & pseudoclasses
+
+
+// ## Base HTML ## //
+@import "base"; 
+
+// ## Layout, page regions, modules, custom selectors ## //
+@import "local";
+
+// ## Project imports ## //
+@import "crs-edu-issues";
+@import "crs-climatechange";
+

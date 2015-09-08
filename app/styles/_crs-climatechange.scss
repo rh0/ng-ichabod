@@ -1,0 +1,213 @@
+@mixin flexy-map($height: 700px) {
+  min-height: $height/2;
+  @include breakpoint($mobile) {
+    min-height: $height * (2/3);
+    background-size: 800px;
+  }
+  @include breakpoint($desktop) {
+    min-height: $height;
+    background-size: 1200px;
+  }
+}
+
+.take-action {
+  .layout-custom {
+    border-bottom: 1px solid $crs-dark-gray; 
+    margin-bottom: $vgutter;
+    @include breakpoint($desktop) {
+      border-bottom: none;
+      margin-bottom: none;
+      @include span(2 of 6);
+      &:last-child {
+        @include span(2 of 6 last);
+      }
+      p {
+        @include font-size(12px);
+      }
+    }
+  }
+}
+#give-icons {
+  img {
+    max-width: 100%;
+  }
+  padding-top: $vgutter;
+  .layout-custom {
+    @include breakpoint($desktop) {
+      @include span(1 of 3);
+      &:last-child {
+        @include span(1 of 3 last);
+      }
+      p {
+        @include font-size(12px);
+      }
+    }
+  }
+}
+#pope-quote {
+  font-family: $serif;
+  p {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+#infographics {
+  @include flexy-map($height: 480px);
+  padding-bottom: $vgutter*2;
+  .layout-custom {
+    text-align: center;
+    @include breakpoint($mobile) {
+      text-align: left;
+      @include span(1 of 2);
+      &:last-child {
+        @include span(1 of 2 last);
+      }
+    }
+  }
+}
+.infographic-image {
+  text-align: center;
+}
+
+.map-bg {
+  background-image: url('../images/map-lighter@2x.png');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 600px;
+}
+.exciter-triangle {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: $vgutter * -2;
+}
+
+.capsule-list {
+  .list-item {
+    @include layout-tiles(2);
+    overflow: hidden;
+    margin-bottom: $vgutter;
+  }
+  .list-image {
+    width: 47%;
+    float: left;
+    margin-right: 3%;
+  }
+  .list-text {
+    overflow: hidden;
+  }
+}
+$toggle-icon-size-desktop: 98px;
+$toggle-icon-size: 60px;
+@mixin position-toggle-icon($ord: 1) {
+  top: $ord * $toggle-icon-size;
+  @include breakpoint($desktop) {
+    top: $ord * $toggle-icon-size-desktop;
+  }
+}
+#action-widget {
+  background: transparentize($black, 0.2);
+  color: $white;
+  padding: $vgutter $hgutter;
+  right: 0;
+  top: 64px;
+  width: 261px;
+  @include breakpoint($desktop) {
+    min-height: $toggle-icon-size-desktop*4+3;
+  }
+  p, textarea {
+    @include font-size(.8);
+  }
+  textarea {
+    height: 100px;
+    width: 100%;
+    margin-bottom: $vgutter;
+  }
+}
+.toggle-tab {
+  opacity: 0.6;
+  display: block;
+  position: absolute;
+  left: -1 * $toggle-icon-size;
+  @include breakpoint($desktop) {
+    left: -1 * $toggle-icon-size-desktop;
+  }
+  padding: 4px;
+  border-radius: 50% 0 0 50%;
+  &:hover {
+    cursor: pointer;
+  }
+  img { 
+    display: block;
+  }
+  &.active-tab {
+    opacity: 1.0;
+    background: transparentize($black, 0.2);
+  }
+}
+#toggle-tab-pray {
+  top: 0px;
+}
+#toggle-tab-learn {
+  @include position-toggle-icon(1);
+}
+#toggle-tab-act {
+  @include position-toggle-icon(2);
+}
+#toggle-tab-give {
+  @include position-toggle-icon(3);
+}
+.action-panel {
+  display: none;
+  &.active-panel {
+    display: block;
+  }
+}
+
+
+// ## TODO: sort these into library ## //
+
+.preview-list {}
+.preview-item {
+  overflow: hidden;
+  .list-image {
+    text-align: center;
+    @include vspace();
+  }
+  @include breakpoint($desktop) {
+    margin-bottom: 0;
+    .views-row-even & {
+      .list-image {
+        @include span(4 of 8);
+      }
+      .list-text {
+        @include span(4 of 8 last);
+      }
+    }
+    .views-row-odd & {
+      .list-image {
+        @include span(4 of 8 last);
+      }
+      .list-text {
+        @include span(4 of 8);
+      }
+    }
+  }
+}
+.share-this-infographic {
+  text-transform: uppercase;
+  text-align: center;
+  @include font-size(0.8);
+  span {
+    color: $crs-fresh-brightgreen;
+  }
+  padding-bottom: $vgutter;
+  .icon {
+    @include font-size(1.5);
+  }
+}
+
+iframe {
+  max-width: 100%;
+}

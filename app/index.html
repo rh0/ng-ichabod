@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="ichabodngApp">
+    <?php include("includes/_head.php"); ?>
+    <section id="edu-superhead" class="overflow-hidden">
+
+      <div id="home-hero-carousel" class="">
+        <nav class="hero-carousel-nav">
+          <a href="#issue-intro" class="hidden">Intro</a>
+          <?php $i=1; foreach($issues as $issue) { ?>
+          <a href="#issue-<?php echo slugify($issue[0]); ?>"><?php echo $issue[0]?></a>
+          <?php } ?>
+        </nav>
+        <div class="home-hero-carousel-wrapper">
+          <article id="issue-intro" class="hero-carousel-item">
+            <img src="images/rays-6.svg" class="rays" style=""><img src="images/hero/hero-intro@2x.jpg" class="hero-carousel-image">
+            <div class="hero-carousel-text">
+              <h1>Going Global with Youth!</h1>
+              <p>Your gateway to ministry and education resources rooted in Catholic Social Teaching and  designed to prepare 21st century global citizens to encounter the world!</p>
+            </div>
+          </article>
+          <?php $i=1; foreach($issues as $issue) { ?>
+          <article id="issue-<?php echo slugify($issue[0]); ?>" class="hero-carousel-item">
+            <a href="<?php echo slugify($issue[0]); ?>.php"><img src="images/rays-6.svg" style="" class="rays"><img src="images/hero/hero-<?php echo slugify($issue[0]); ?>@2x.jpg" class="hero-carousel-image" style="margin-left: <?php echo $issue[1] ?>"></a>
+            <div class="hero-carousel-text">
+              <h2><a href="<?php echo slugify($issue[0]); ?>.php">Short inspirational text on the subject of <strong>&nbsp;<?php echo $issue[0] ?></strong></a></h2>
+              <div class="item-list action-icons align-center">
+                <?php $actions = array(
+                "Pray", "Learn", "Act", "Give",
+                );
+                $j = $i%4;
+                foreach ($actions as $action) {
+                $color = $j%4;
+                ?>
+                <a href="<?php echo slugify($issue[0]); ?>.php#<?php echo slugify($action); ?>" class="list-item  align-center">
+                  <img src="images/icon-<?php echo strtolower($action) ?>-plain.svg" class="encircled display-block subflavor-<?php echo $color ?> ">
+                  <h5><?php echo $action ?></h5>
+                </a>
+                <?php $j++; } ?>
+              </div>
+            </div>
+          </article>
+          <?php } ?>
+        </div>
+      </div>
+
+    </section>
+
+
+    <section id="edu-mission" class="layout-row">
+      <div class="layout-innerwrapper">
+
+        <h6><span>CRS Education Mission</span></h6>
+
+        <div class="text-carousel flexslider">
+          <ul class="slides">
+
+            <li id="text-carousel-item-1" class="carousel-item">
+              <div class="carousel-image">
+                <img src="images/carousel-solidarity@2x.jpg" alt="" width="400">
+              </div>
+              <div class="carousel-text">
+                <h3>Solidarity and Social Mission</h3>
+                <p>
+                Magna fusce amet sed dis vivamus ac mus ridiculus duis dapibus felis porta ullamcorper volutpat. Porta fames aptent ipsum nascetur id mauris egestas at mi tempor. Class metus massa dui arcu egestas purus per nibh libero suscipit. Massa lacus ante feugiat fusce. Risus justo. Metus donec a aliquet litora eget aenean curabitur.
+                </p>
+              </div>
+            </li><!--/#text-carousel-item-1-->
+
+            <li id="text-carousel-item-2" class="carousel-item">
+              <div class="carousel-image">
+                <img src="images/carousel-sacraments@2x.jpg" alt="" width="400">
+              </div>
+              <div class="carousel-text">
+                <h3>Sacraments</h3>
+                <p>
+                Purus lorem ultrices augue cubilia tortor ut eleifend nisl ultrices donec pellentesque malesuada. Porta neque. Class magna eget conubia ante dictumst class eros iaculis. Nulla proin magna primis lacus vestibulum pharetra.
+                </p>
+              </div>
+            </li><!--/#text-carousel-item-2-->
+
+            <li id="text-carousel-item-3" class="carousel-item">
+              <div class="carousel-image">
+                <img src="images/carousel-elementary@2x.jpg" alt="" width="400">
+              </div>
+              <div class="carousel-text">
+                <h3>Elementary, Children & Family</h3>
+                <p>
+                Purus lorem ultrices augue cubilia tortor ut eleifend nisl ultrices donec pellentesque malesuada. Porta neque. Class magna eget conubia ante dictumst class eros iaculis. Nulla proin magna primis lacus vestibulum pharetra.
+                </p>
+              </div>
+            </li><!--/#text-carousel-item-3-->
+
+          </ul>
+        </div><!--/.carousel.flexslider-->
+
+      </div>
+    </section><!--/#edu-mission-->
+
+
+    <section id="edu-core-programs" class="layout-row bg-whisper">
+      <div class="layout-innerwrapper">
+        <h6><span>CRS Education Core Programs</span></h6>
+
+        <div class="item-list custom-tile-list">
+
+          <a href="" class="list-item custom-tile-item">
+            <div class="list-image">
+              <img class="" src="images/thnl-food-fast@2x.jpg" alt="">
+            </div>
+            <div class="list-text">
+              <h5>Food Fast</h5>
+            </div>
+          </a>
+          <a href="" class="list-item custom-tile-item">
+            <div class="list-image">
+              <img class="" src="images/thnl-global-high-school@2x.jpg" alt="">
+            </div>
+            <div class="list-text">
+              <h5>Global High School</h5>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="layout-innerwrapper align-center">
+        <a href="" class="button">Other CRS Programs</a>
+      </div>
+
+    </section><!--/#edu-core-programs-->
+
+    <section id="crs-works-to" class="layout-row bg-hushed fg-white">
+      <div class="layout-innerwrapper align-center">
+        <h6><span>CRS Works to:</span></h6>
+
+        <div class="layout-fixed-8 align-center">
+          <a href="http://crs.org/emergency/" class="list-item">
+            <img src="images/emergencies.svg" alt="" width="130" class="">
+            <h5><strong>Respond</strong><br>to global emergencies</h5>
+          </a>
+        </div>
+
+        <div class="layout-fixed-8 align-center">
+          <a href="http://crs.org/hunger/" class="list-item">
+            <img src="images/food.svg" alt="" width="130" class="">
+            <h5><strong>Eradicate</strong><br>hunger</h5>
+          </a>
+        </div>
+        <div class="layout-fixed-8 align-center">
+          <a href="http://www.crsprogramquality.org/publications/tag/OVC" class="list-item">
+            <img src="images/health.svg" alt="" width="130" class="">
+            <h5><strong>Defend</strong><br>human dignity</h5>
+          </a>
+        </div>
+
+      </div>
+    </section>
+    <?php include("includes/_foot.php"); ?>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <!--
+    <div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <a class="navbar-brand" href="#/">ichabodng</a>
+          </div>
+
+          <div class="collapse">
+
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#/">Home</a></li>
+              <li><a ng-href="#/about">About</a></li>
+              <li><a ng-href="#/">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+    <div ng-view=""></div>
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+      </div>
+    </div>
+    -->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

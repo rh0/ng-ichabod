@@ -1,0 +1,1071 @@
+// # Layout # //
+.layout-row {
+  // Wraps each page row across the entire viewport. In general: put background colors here 
+  width: 100%;
+  background-color: $white;
+  @include vpadding();
+}
+.layout-outerwrapper, .layout-outer-wrapper {
+  // used mainly with heroes to provide a container for ray backgrounds
+}
+.layout-desktopwrapper, .layout-desktop-wrapper {
+  // creates desktop width container for desktop ONLY
+  @include breakpoint($desktop) {
+    @include container($desktop);
+  }
+}
+.layout-innerwrapper, .layout-inner-wrapper {
+  // provides a fixed-width inner container so content doesn't eat up wide viewports.
+  // Flexible width on non-desktop viewports
+  padding: 0 $hgutter;
+  @include vspace(1, top);
+  @include breakpoint($mobile) {
+    @include container(100%);
+  }
+  @include breakpoint($desktop) {
+    @include container($desktop);
+    padding: 0 0;
+  }
+}
+.layout-generic-container, .layout-container { 
+  // provides a flexible container with no widths
+  // NOTE: .layout-inner-wrapper is ALREADY a container! 
+  @include container;
+}
+.layout-custom-wrapper {
+  // empty selector useful for subclassing with IDs to create custom layouts. e.g.:
+  // #hero .layout-custom-wrapper { text-align: center; }
+  // BASE SELECTOR SHOULD BE EMPTY
+}
+.float-left, .float_left {
+  float: left;
+  margin-right: $hgutter/2;
+  @include breakpoint($desktop) {
+    margin-right: $hgutter;
+  }
+}
+.float-right, .float_right {
+  float: right;
+  margin-left: $hgutter/2;
+  @include breakpoint($desktop) {
+    margin-left: $hgutter;
+  }
+}
+.capsule {
+  overflow: hidden;
+}
+
+// ### Generic width/column selectors ### //
+
+// Use these to provide widths to page regions or other empty components
+// In general, I try to provide explicit widths for page components using the span() mixin.
+// All of these default to full width on non-desktop viewports
+// They provide NO PADDING!
+.layout-fixed-container {
+  @include layout($susy);
+  overflow: hidden;
+}
+@for $i from 1 through 24 {
+  // generates 24 selectors $i columns (of 24) wide
+  .layout-fixed-#{$i} {
+    @include layout-fixed-column($i);
+  }
+}
+.layout-fixed-last, .last {
+  // in general, the :last-child pseudoselector takes care of this. But in case you need to remove the margin on the last column in a row:
+  margin-right: 0;
+}
+.layout-pad-page { // adds an empty row at the top of the page to keep the menu from running over text if there's no page hero
+  height: 60px;
+  @include breakpoint($desktop) {
+    clear: both; // TODO: why do I have to do this?   
+  }
+}
+.layout-top-padding { // adds padding to an element e.g. the first element on a page if the page doesn't have a hero
+  @include breakpoint($desktop) {
+    padding-top:60px;
+  }
+}
+.layout-responsive-media {
+  @include breakpoint($mobile) {
+    width: 49%;
+  }
+  img {
+    display: block;
+  }
+}
+
+
+
+// # Page Regions # //
+
+#brand-header {
+  overflow: hidden;
+  text-align: center;
+  @include breakpoint($desktop) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  border-bottom: 7px solid $crs-fresh-brightblue;
+  .crs-logo {
+    margin: 0 auto;
+    text-align: right;
+    img {
+      max-width: 100%;
+    }
+    @include span(12 of 24);
+    @include breakpoint($desktop) {
+      img {
+        max-width: inital;
+      }
+      text-align: left;
+      @include span(6 of 24);
+    }
+  }
+  .navigation {
+    padding-top: 20px;
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    @include breakpoint($desktop) {
+      clear: none;
+      @include span(12 of 24 last);
+      text-align: right;
+      padding-top: 30px;
+    }
+  }
+}
+
+.navbar-toggle {
+  line-height: 35px;
+  text-align: right;
+  float: right;
+  margin-right: 10px;
+  text-transform: uppercase;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.navbar-collapse { // wraps the menu
+  display: none;
+  text-align: left;
+  @include breakpoint($desktop) {
+    display: block;
+    text-align: right;
+    @include span(16 of 24 last);
+    line-height: 60px;
+    ul {
+      list-style-type: none;
+      margin: 0;
+    }
+    & > ul {
+      & > li {
+        margin-right: $hgutter;
+        display: inline-block;
+        &:last-child {
+          margin-right: 0;
+        }
+        a {
+          display: block;
+        }
+      }
+    }
+  }
+  li a, li a:link, li a:visited {
+    color: $white;
+  }
+}
+#subbrand-header {
+  display: block;
+  overflow: visible;
+  width: 100%;
+  color: $white;
+  @include background-image(linear-gradient(to right, transparentize(map-get($crs-fresh-map, 1), .5), map-get($crs-fresh-map, 1)));
+  height: 35px;
+  @include breakpoint($desktop) {
+    height: 60px;
+  }
+  .layout-innerwrapper {
+    margin: 0 auto;
+  }
+}
+.title-subbrand {
+  margin: 0;
+  font-weight: $normal-weight;
+  float: left;
+  width: auto;
+  margin-right: 0;
+  margin-left: 10px;
+  @include font-size(1.25);
+  img {
+    height: 20px;
+    margin-top: 5px;
+  }
+  line-height: 1.5;
+  @include breakpoint($desktop) {
+    margin-left: 0;
+    @include font-size(2.25);
+    @include span(8 of 24); // this may need to be adjusted on different projects
+    img {
+      height: 30px;
+    }
+  }
+}
+
+#nonheader-wrapper { // wraps page below header & above footer stuff. provides margin so content doesn't vanish behind the subnav
+  position: relative;
+  @include breakpoint($desktop) {
+    margin-top: 60px;
+    background: $white;
+  }
+}
+
+#brand-footer {
+  @include vpadding(3);
+  background-color: $crs-brand-darkblue;
+  font-weight: $light-weight;
+  color: $hushed;
+  .mission-content {
+    @include breakpoint($desktop) {
+      @include span(1 of 2);
+    }
+  }
+}
+
+#page-footer {
+  @include vpadding(2);
+  color: $crs-light-gray;
+  background: $eigengrau;
+  @include font-size(0.8);
+  a:link, a:visited, a {
+    color: inherit;
+    &.icon {
+      color: $eigengrau;
+      background-color: $crs-light-gray;
+    }
+  }
+}
+#address-tos {
+  @include font-size(0.6); 
+  line-height: 1.5;
+  @include vspace();
+  //margin-top: $vgutter;
+  border-top: 1px solid $gray-3;
+  border-bottom: 1px solid $gray-3;
+  @include vpadding();
+  ul {
+    margin-bottom: 0;
+  }
+  li {
+    @include breakpoint($desktop) {
+      display: inline-block;
+      padding: 0 $hgutter/2;
+      border-right: 1px solid $gray-3;
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+        border-right: none;
+      }
+    }
+  }
+  .irl-address {
+    @include breakpoint($desktop) {
+      @include span(17 of 24);
+    }
+  }
+  .tos-links {
+    @include breakpoint($desktop) {
+      text-align: right;
+      @include span(7 of 24 last);
+    }
+  }
+}
+
+#fid-and-follow {
+  padding: ($vgutter * 2.5) 0 ($vgutter * 1.5) 0;
+  .follow-us {
+    @include breakpoint($desktop) {
+      @include span(12 of 24 last);
+      text-align: right;    
+    }
+  }
+}
+#fid-wrapper {
+  @include breakpoint($desktop) {
+    @include span(12 of 24);
+  }
+  .fid {
+    display: block;
+    @include breakpoint($desktop) {
+      float: left;
+    }
+    @include font-size(1.7);
+    font-weight: $light-weight;
+    margin-right: $hgutter/2;
+  }
+  .fid-explainer {
+    display: block;
+    @include vspace();
+    @include breakpoint($desktop) {
+      float: left;
+    }
+    @include font-size(0.625);
+    text-transform: uppercase;
+  }
+}
+#legalese {
+  @include breakpoint($desktop) {
+    @include span(24 of 48);
+  }
+  @include vspace();
+}
+#endorsements {
+  overflow: hidden;
+  .tile {
+    @include breakpoint($desktop) {
+      @include span(8 of 24);
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+#endorsement-logos {
+  text-align: center;
+  @include vspace();
+  img {
+    display: inline-block;
+    margin-right: $hgutter;
+  }
+}
+
+// # Components/Modules # //
+
+// ## Navigation ## //
+.navigation {
+  @include font-size(0.75);
+  text-transform: uppercase;
+  a, a:link, a:visited {
+    color: $crs-dark-gray;
+    text-decoration: none;
+  }
+}
+.nav-search {
+}
+.navigation-inline {
+  text-transform: uppercase;
+  ul {
+    list-style-type: none;
+    margin: 0;
+  }
+  & > ul {
+    & > li {
+      margin-right: $hgutter;
+      display: inline-block;
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        display: block;
+      }
+    }
+  }
+}
+
+.menu { // INSIDE nav
+  background: transparentize($crs-dark-gray, 0.2);
+  a {
+    padding: 5px 10px;
+    display: block;
+  }
+  @include breakpoint($desktop) {
+    background: transparent;
+    a {
+      padding: 0;
+    }
+  }
+  &, & ul {
+    list-style: none;
+    margin: 0;
+    clear: both;
+  }
+  & > li {
+    white-space: nowrap;
+  }
+}
+.has-submenu {
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.submenu {
+  display: none;
+  background: transparentize($crs-dark-gray,0.2);
+  @include breakpoint($desktop) {
+    position: absolute;
+    text-align: left;
+    padding: 10px;
+    & > li {
+      line-height: 2.0;
+    }
+  }
+  left: 0;
+  top: 100%;
+}
+.expanded {
+  display: block;
+}
+
+
+// ## Tabs ## //
+.tab-wrapper {
+  overflow: hidden;
+}
+.tab-controls {
+  overflow: hidden;
+  width: 100%;
+  margin: 0 0 $vgutter*2 0;
+  ul {
+    margin: 0;
+    li {
+      display: block;
+      float: left;
+      padding-bottom: 18px;
+    }
+  }
+  @for $i from 1 through 10 {
+    &.tabs-#{$i} {
+      ul li {
+        width: 100% / $i;
+      }
+    }
+  }
+  a {
+    color: $white;
+    text-transform: uppercase;
+    background: $crs-med-gray;
+    text-decoration: none;
+    font-weight: $bold-weight;
+    text-align: center;
+    padding: $vgutter/2 0;
+    display: block;
+    width: 100%;
+  }
+  .ui-state-active {
+    background-image: url('../images/pointer-down@2x.png');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+    a {
+      background: $crs-dark-gray;
+    }
+  }
+}
+.tab-item {
+  overflow: hidden;
+}
+.tab-item-text {
+}
+.tab-item-image {
+  text-align: center;
+  img {
+    max-width: 100%;
+  }
+}
+
+
+// ## Heroes ## //
+.hero { 
+  // use this base class for any full-bleed or full-viewport hero image. 
+  // Specify the image URL inline (via the style attribute) or by overloading
+  // e.g. #home-hero.hero { background-image: url('path/to/image.jpg'); } 
+  background-color: $black;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  color: $white;
+  position: relative;
+  @include breakpoint($wide) {
+    background-size: contain;
+  }
+}
+.small-hero {
+  // hero image for most content pages.
+  // specify the image-url in the style attribute or overload this selector
+  height: 180px;
+  background-size: cover;
+  background-position: center center;
+  padding-top: 0;
+  padding-bottom: 0;
+  @include breakpoint($desktop) {
+    height: 240px;
+  }
+  @include breakpoint($wide) {
+    height: 380px
+  }
+  h1 {
+    position: absolute;
+    bottom: 0;
+    @include vspace(0.5);
+    // left: 0;
+  }
+  .layout-innerwrapper {
+    margin-top: 0;
+    margin-bottom:0;
+  }
+  .layout-outerwrapper {
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+    overflow: visible;
+    background-position: -15% center;
+    @include breakpoint($mobile) {
+      background-position: left center;
+    }
+    @include breakpoint($desktop) {
+      background-position: 15% center;
+    }
+    @include breakpoint($wide) {
+      background-position: 25% center;
+    }
+  }
+}
+.home-hero { // unused this project?
+  @include breakpoint($desktop) {
+    height: 450px;
+  }
+  a.layout-innerwrapper {
+    display: block;
+    text-decoration: none;
+    &:hover {
+      opacity: 1.0;
+    }
+    h1, h3 {
+      color: $white;
+    }
+  }
+  .layout-custom-wrapper {
+    max-width: 300px;
+    padding-bottom: 30px;
+    h3 {
+      font-size: 1rem;
+    }
+    @include breakpoint(410px) {
+      h3 {
+        margin-bottom: $vgutter * 2.8;
+      }
+    }
+    @include breakpoint($desktop) {
+      max-width: 370px;
+      text-align: left;
+      //position: absolute;
+      margin-top: 10%;
+      margin-bottom: 15%;
+      max-width: 100%;
+      padding-bottom: 0;
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  @include breakpoint(410px) {
+    .formbutton-hot {
+      margin-top: 4px;
+    }
+  }
+  .cta-bar input[type=text] {
+    width: auto;
+  }
+}
+@for $i from 1 through 6 {
+  // generates rays that can be used in backgrounds, usually with .layout-outerwrapper
+  .rays-#{$i} {
+    background-image: url('../images/rays-#{$i}.svg');
+  }
+}
+
+// ### Text Carousel ### //
+// this one has an image on the left and text on the right
+
+.text-carousel {
+  overflow: visible;
+}
+.carousel-item {
+  overflow: hidden;
+}
+.carousel-image {
+  text-align: center;
+  @include span(12 of 24);
+  img {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.carousel-text {
+  @include span(12 of 24 last);
+}
+.carousel-controls {
+  padding-top: $vgutter;
+  ul {
+    margin: 0;
+    list-style-type: none;
+    li {
+      display: inline-block;
+      margin-right: $hgutter/4;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  a {
+    display: block;
+    background: transparentize($crs-med-gray, 0.7);
+    border-radius: 50%;
+    width: $hgutter;
+    height: $hgutter;
+    margin-right: 0;
+  }
+  .ui-state-active a {
+    background: $crs-med-gray;
+  }
+}
+
+// ## Aggregated item lists ## //
+
+.item-list { // generic aggregated item list.
+  clear: both;
+  overflow: hidden;
+} 
+
+.list-item { // EVERY item in a list gets this class
+  display: block;
+  position: relative;
+  h5, p {
+    margin: 0;
+    @include font-size(0.9);
+  }
+  .list-image img {
+    display: block;
+  }
+}
+a.list-item {
+  &, &:link, &:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.featured-items {}
+.featured-item {
+  @include card-item;
+  @include breakpoint($mobile) {
+    @include span(12 of 24);
+    &:nth-child(2n) {
+      @include span(12 of 24 last);
+    }
+  }
+  .list-text {
+    padding: $vgutter $hgutter;
+  }
+  .list-image {
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+.person-list {}
+.person-item {
+  @include card-item;
+  @include breakpoint($mobile) {
+    @include span(12 of 24);
+    &:nth-child(2n) {
+      @include span(12 of 24 last);
+    }
+  }
+  .list-image {
+    img { // HACKY
+      width: 96px;
+      height: 112.5px;
+      @include breakpoint($desktop) {
+        width: 192px;
+        height: 225px;
+      }
+    }
+  }
+  .list-text {
+    padding: $vgutter $hgutter $vgutter 0;
+  }
+  p {
+    @include font-size(.8);
+  }
+}
+
+.document-list {}
+.document-item {
+  @include card-item;
+  padding: $vgutter $hgutter;
+  @include breakpoint($mobile) {
+    @include span(12 of 24);
+    &:nth-child(2n) {
+      @include span(12 of 24 last);
+    }
+  }
+  p {
+    @include font-size(.8);
+  }
+}
+
+.capsule-list {}
+.capsule-item {
+  clear: both;
+  overflow: hidden;
+  @include vspace();
+  img { // TODO: these image sizes should be generated with an image filter
+    width: 55px;
+    height: 55px;
+    @include breakpoint($desktop) {
+      width: 110px;
+      height: 110px;
+    }
+  }
+}
+
+.tile-list {
+  overflow: hidden;
+}
+.tile-item {
+  background: $crs-dark-gray;
+  color: $white;
+  text-align: center;
+  @include vspace(.5);
+  .three-up &, & {
+    @include layout-tiles(3);
+  }
+  .four-up & {
+    @include layout-tiles(4);
+  }
+  .list-text {
+    padding: $vgutter $hgutter;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    h4 {
+      margin: 0;
+    }
+  }
+}
+.list-image {
+    img, & {
+      display: block;
+      max-width: 100%;
+      max-height: auto;
+    }
+  }
+a.tile-item {
+  &, &:link, &:visited {
+    color: $white;
+  }
+}
+
+.bubble-item { // overclass .tile-item
+  overflow:hidden;
+  border-radius: $vgutter*2;
+  @include breakpoint($desktop) {
+    height: 315px;
+    border-radius: 50%;
+    text-align: center;
+    .list-text  {
+      padding: 0 $hgutter*3 $vgutter*2 $hgutter*3
+    }
+    .list-image {
+      text-align: center;
+      width: 315px;
+      height: 315px;
+      margin-left: -25%;
+      img {
+        height: 100%;
+        max-width: none;
+      }
+    }
+  }
+}
+
+// ## Addresses and such ## //
+.irl-address { }
+
+// ## Icons
+
+a.icon {
+  &:link, &:visited, & { 
+    color: inherit;
+    text-decoration: none;
+  }
+}
+.circled-icon {
+  @include circled-icon();
+}
+.navigation-icons { // generally for social media
+}
+
+
+// ## Misc. components/modules ## //
+.separated-section { // useful for dividing a page into vertical section
+  border-bottom: 1px solid $whisper;
+  padding-bottom: $vgutter;
+  @include vspace(2);
+}
+.cta-bar { // Call to Action bar affixed to bottom of a page row
+  position: absolute; // make sure parent element has position:relative
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.panel {
+  // apply color as a separate class in markup
+  padding: $vgutter $hgutter;
+  @include vspace();
+}
+.caption {
+  @include font-size(0.9);
+  color: $hushed;
+}
+
+.exciter {
+  // This is a full-width section header with a downward-pointing arrow. See base-text.php for usage.
+  color: $white;
+  text-align: center;
+  margin-top: -1 * $vgutter;
+  h1, h2, h3 {
+    background-color: $black;
+    padding: 20px 0;
+    font-size: 32px;
+    margin: 0;
+  }
+  svg g {
+    fill: $black;
+  }
+  @for $i from 1 through 3 {
+    &.subflavor-#{$i} {
+      h1, h2, h3 {
+        @include bg-color(map-get($crs-fresh-map, $i));
+      }
+      svg g {
+        fill: map-get($crs-fresh-map, $i);
+      }
+    }
+  }
+}
+
+
+
+// # State # //
+.is-absolute { 
+  z-index: 9999;
+  position: absolute;
+}
+.is-static {
+  z-index: 9999;
+  position: absolute;
+  @include breakpoint(max-width $desktop+1) {
+    position: relative;
+  }
+}
+
+.is-fixed {
+  position: fixed;
+  top: 0;
+  z-index: 1030;
+}
+.hide-mobile {
+  @include breakpoint(max-width $mobile) {
+    display: none !important;
+  }
+}
+.hide-nonmobile {
+  @include breakpoint(min-width $mobile+1) {
+    display: none !important;
+  }
+}
+.hide-desktop {
+  @include breakpoint(min-width $desktop) {
+    display: none !important;
+  }
+}
+.hide-nondesktop {
+  @include breakpoint(max-width $desktop+1) {
+    display: none !important;
+  }
+}
+
+
+
+// ## Text styles ## //
+
+// ### Colors ### //
+.bg-quiet {
+  @include bg-color($quiet);
+}
+.bg-hushed {
+  @include bg-color($hushed);
+}
+.bg-whisper {
+  @include bg-color($whisper);
+}
+.bg-silent {
+  @include bg-color($silent);
+}
+.bg-dim {
+  @include bg-color(transparentize($black, 0.8));
+}
+.bg-bright {
+  @include bg-color(transparentize($white, 0.8));
+}
+.bg-reversed, .bg-reverse {
+  @include bg-color($body-color);
+}
+.bg-black {
+  @include bg-color($black);
+}
+.bg-body-color {
+  @include bg-color($body-color);
+}
+
+// #### Color subflavors #### //
+// TODO: abstract or indirect these 
+@for $i from 1 through 3 {
+  .fg-subflavor-#{$i} {
+    color: map-get($crs-fresh-map, $i);
+  }
+  .bg-subflavor-#{$i} {
+      @include bg-color(map-get($crs-fresh-map, $i));
+  }
+  .bg-fade-subflavor-#{$i} {
+      @include bg-color(transparentize(map-get($crs-fresh-map, $i), 0.2));
+  }
+}
+.bg-brand-blue {
+  @include bg-color($crs-brand-blue);
+}
+.fg-white {
+  color: $white;
+}
+.fg-quiet {
+  color: $quiet;
+}
+.fg-hushed {
+  color: $hushed;
+}
+.fg-whisper {
+  color: $whisper;
+}
+.fg-black {
+  color: $black;
+}
+.fg-body-color {
+  color: $body-color;
+}
+
+// #### text-align layouts #### //
+@each $x in (center, left, right) {
+  .align-#{$x} {
+    text-align: $x;
+  }
+}
+.nomargin, .no-margin {
+  margin: 0;
+}
+
+// #### Misc small text/typographic selectors #### //
+
+.normal-weight, .no-bold, .nobold {
+  font-weight: $normal-weight;
+}
+.bold-weight {
+  font-weight: $bold-weight;
+}
+.light-weight {
+  font-weight: $light-weight;
+}
+.lowercase, .nocaps, .no-caps {
+  text-transform: lowercase;
+}
+.uppercase, .allcaps, .all-caps {
+  text-transform: uppercase;
+}
+.no-case, .nocase, .natural-case, .naturalcase {
+  text-transform: none;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.no-underline, a.no-underline, a.no-underline:link, a.no-underline:visited {
+  text-decoration: none;
+}
+
+// ## Misc graphic styles ## //
+.rose-window {
+  overflow: hidden;
+  background-image: url("../images/rose-window-1@3x.png");
+  background-repeat: no-repeat;
+  background-position: -70px -70px;
+  background-size: 312px; 
+}
+.img-border {
+  border: 1px solid $crs-pale-gray;
+}
+
+// Unsorted //
+
+.tagline {
+  font-family: $serif;
+  letter-spacing: -0.03em;
+  font-weight: $bold-weight;
+  @include font-size(2);
+  padding-top: $vgutter * 2;
+}
+.innerpadding { 
+  // useful for providing padding to absolutely-positioned elements
+  // will generally not be necessary as box-sizing is set universally
+  // but still good to have around
+  padding: $vgutter $hgutter;
+}
+.cta, a.cta {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+  &:after {
+    content: "\00a0›";
+  }
+}
+
+
+.inline {
+  display: inline;
+}
+.serif {
+  font-family: $serif;
+}
+.clearfix, .clear-both, .clear-fix {
+  clear: both;
+}
+.margin-bottom {
+  margin-bottom: $vgutter;
+}
+.display-block {
+  display: block;
+  margin: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="849px" height="380px" viewBox="0 0 849 380" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>rays-1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="59.1149586%" y1="0%" x2="59.1149569%" y2="96.8174342%" id="linearGradient-1">
+            <stop stop-color="#149E7B" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#B8D108" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="23.0061591%" y1="0%" x2="23.0061584%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#14A6DB" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#149E7B" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="rays1" sketch:type="MSLayerGroup">
+            <path d="M381.343874,0 L694,0 L312.656126,380 L0,380 L381.343874,0 Z" id="Rectangle-3" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+            <path d="M616.343874,0 L849,0 L467.656126,380 L235,380 L616.343874,0 Z" id="Rectangle-3" fill="url(#linearGradient-2)" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
