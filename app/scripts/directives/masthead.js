@@ -10,6 +10,6 @@ angular.module('ichabodngApp')
   .directive('masthead', function () {
     return {
       restrict: 'E',
-      templateUrl: '/templates/masthead.html'
+      templateUrl: '../../templates/masthead.html'
     };
   });
