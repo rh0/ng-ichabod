@@ -10,7 +10,7 @@ angular.module('ichabodngApp')
   .directive('navbar', function (menuGetter) {
     return {
       restrict: 'E',
-      templateUrl: '../../templates/navbar.html',
+      templateUrl: 'templates/navbar.html',
       scope: {},
       link: function(scope, element) {
         scope.mainMenu = menuGetter.navigationMenu;
