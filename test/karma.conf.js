@@ -19,10 +19,21 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/flexslider/jquery.flexslider.js',
+      'bower_components/get-style-property/get-style-property.js',
+      'bower_components/get-size/get-size.js',
+      'bower_components/eventie/eventie.js',
+      'bower_components/doc-ready/doc-ready.js',
+      'bower_components/eventEmitter/EventEmitter.js',
+      'bower_components/matches-selector/matches-selector.js',
+      'bower_components/fizzy-ui-utils/utils.js',
+      'bower_components/outlayer/outlayer.js',
+      'bower_components/masonry/masonry.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -1,0 +1,27 @@
+<header id="subbrand-header" class="is-static">
+  <nav class="navbar layout-desktopwrapper">
+
+    <div class="navbar-header">
+      <div class="title-subbrand">
+        <a href="./index.php"><img src="images/crs-education-logo-white.svg" alt="Education" ></a>
+      </div>
+      <div class="navbar-toggle hide-desktop">
+        Menu
+      </div>
+    </div>
+
+    <div class="navigation navbar-collapse">
+      <ul class="menu">
+        <li ng-repeat="menuParent in mainMenu" ng-class="{'has-submenu': menuParent.submenu}">
+          <a href="{{menuParent.href}}" ng-mouseover="menuToggle($index)" ng-mouseleave="menuHide()">{{menuParent.title}}</a>
+          <ul ng-if="menuParent.submenu" class="submenu" ng-class="{'expanded': subSelected==$index}">
+            <li ng-repeat="menuChild in menuParent.submenu">
+              <a href={{menuChild.href}}">{{menuChild.title}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+</header>
